@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-
 void displaySymbols(int count);
 int calculateNumberOfSymbolsToDisplay(int time, int secondsPerSymbol);
 void displayEmptySpaces(int count);
@@ -15,7 +11,7 @@ int main(){
   while(timeElapsed <= seconds){
     int numberOfSymbolsToDisplay = (timeElapsed / secondsPerSymbol);
 
-    printf("\r%02d [", seconds - timeElapsed);
+    printf("\rtime left: %02d [", seconds - timeElapsed);
     sleep(1);
     displaySymbols(numberOfSymbolsToDisplay);
     displayEmptySpaces(totalSymbols - numberOfSymbolsToDisplay);
@@ -25,6 +21,7 @@ int main(){
   }
 
   printf("\n");
+  printf("and we are finished!");
   return 0;
 }
 
