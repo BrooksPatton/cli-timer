@@ -42,7 +42,6 @@ int main(int argc, char **argv){
   }
 
   printf("\n");
-  printf("and we are finished!");
   return 0;
 }
 
