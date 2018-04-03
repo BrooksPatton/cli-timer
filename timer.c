@@ -5,12 +5,13 @@ void displayHelp();
 
 int main(int argc, char **argv){
   char arguments;
-  int timeElapsed = 0;
-  float totalSymbols = 20.0;
   int timeInMinutes;
   char *message;
   int seconds;
   float secondsPerSymbol;
+  int timeElapsed = 0;
+  float totalSymbols = 20.0;
+
 
   while((arguments = getopt(argc, argv, "t:hm:")) != -1){
     if(arguments == 't') {
