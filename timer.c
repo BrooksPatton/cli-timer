@@ -1,17 +1,37 @@
 void displaySymbols(int count);
 int calculateNumberOfSymbolsToDisplay(int time, int secondsPerSymbol);
 void displayEmptySpaces(int count);
+void displayHelp();
 
-int main(){
-  int seconds = 60;
+int main(int argc, char **argv){
+  char arguments;
   int timeElapsed = 0;
-  float totalSymbols = 80.0;
-  float secondsPerSymbol = seconds / totalSymbols;
+  float totalSymbols = 20.0;
+  int timeInMinutes;
+  char *message;
+  int seconds;
+  float secondsPerSymbol;
+
+  while((arguments = getopt(argc, argv, "t:hm:")) != -1){
+    if(arguments == 't') {
+      timeInMinutes = atoi(optarg);
+    }
+    else if(arguments == 'm') {
+      message = optarg;
+    }
+    else if(arguments == 'h') {
+      displayHelp();
+      return 0;
+    }
+  }
+
+  seconds = timeInMinutes * 60;
+  secondsPerSymbol = seconds / totalSymbols;
 
   while(timeElapsed <= seconds){
     int numberOfSymbolsToDisplay = (timeElapsed / secondsPerSymbol);
 
-    printf("\rtime left: %02d [", seconds - timeElapsed);
+    printf("\r%s: %02d [", message, seconds - timeElapsed);
     sleep(1);
     displaySymbols(numberOfSymbolsToDisplay);
     displayEmptySpaces(totalSymbols - numberOfSymbolsToDisplay);
@@ -45,4 +65,13 @@ void displayEmptySpaces(int count){
   for(int i = 1; i < count; i++){
     printf(" ");
   }
+}
+
+void displayHelp(){
+  printf("\nUsage: timer -t (time) -m (message) [-h]\n");
+  printf("example: timer -t 5 -m \"starting soon\"\n");
+  printf("\noptions\n\n");
+  printf("-t time in minutes to count down");
+  printf("-m message to display next to counter");
+  printf("-h this help message\n");
 }
